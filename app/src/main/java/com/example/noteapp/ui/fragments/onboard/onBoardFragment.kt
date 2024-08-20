@@ -1,20 +1,25 @@
 package com.example.noteapp.ui.fragments.onboard
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.navOptions
 import androidx.viewpager2.widget.ViewPager2
 import com.example.noteapp.R
 import com.example.noteapp.databinding.FragmentOnBoardBinding
 import com.example.noteapp.ui.adapter.onBoardAdapter
+import com.example.noteapp.utils.PreferenceHelper
 import com.google.android.material.tabs.TabLayoutMediator
 
 class onBoardFragment : Fragment() {
 
     private lateinit var binding: FragmentOnBoardBinding
+    private lateinit var sharedPreferences: PreferenceHelper
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -30,7 +35,10 @@ class onBoardFragment : Fragment() {
         setupListener()
         setupListener2()
         setupTabLayout()
-        setupTabLayout2()
+        binding.tvWork.setOnClickListener {
+            findNavController().navigate(R.id.action_onBoardFragment_to_noteAppFragment)
+
+        }
     }
 
     private fun setupListener2()= with(binding.vpViewpager2) {
@@ -99,17 +107,6 @@ class onBoardFragment : Fragment() {
                 }
             }
         })
-    }
-
-
-    private fun setupTabLayout2() {
-        TabLayoutMediator(binding.tabLayout, binding.vpViewpager2) { tab, position ->
-            tab.customView = layoutInflater.inflate(R.layout.custom_tab, null)
-
-            tab.view.isClickable = false
-            tab.view.isFocusable = false
-            tab.view.isFocusableInTouchMode = false
-        }.attach()
     }
 
 }
