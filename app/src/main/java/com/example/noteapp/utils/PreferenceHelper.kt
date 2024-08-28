@@ -18,4 +18,8 @@ class PreferenceHelper {
     var onBoardShow: Boolean
         get() = sharedPreferences.getBoolean("onboard",false)
         set(value) = sharedPreferences.edit().putBoolean("onboard",value).apply()
+
+    var layout: Boolean
+        get() = sharedPreferences.getBoolean("layout", false)
+        set(value) = sharedPreferences.edit().putBoolean("layout",value).apply()
 }

@@ -34,11 +34,19 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun Enter() {
-        if (sharedPreferences.onBoardShow) {
+        if (!sharedPreferences.onBoardShow) {
             navController.navigate(R.id.onBoardFragment)
-            sharedPreferences.onBoardShow = false
+            sharedPreferences.onBoardShow = true
         } else {
             navController.navigate(R.id.noteAppFragment)
+        }
+    }
+
+    override fun onBackPressed() {
+        if (navController.currentDestination?.id == R.id.noteAppFragment) {
+            finish()
+        } else {
+            super.onBackPressed()
         }
     }
 }
